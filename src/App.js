@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+function Header() {
+	return (
+		<header>
+			<h1>Project Name</h1>
+		</header>
+	);
+}
+
+function Main() {
+	return (
+		<header>
+			<h2>This is our project</h2>
+		</header>
+	);
+}
+
+function Footer() {
+	return (
+		<header>
+			<h3>All Rights Reserved Project Name &copy; 2021</h3>
+		</header>
+	);
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Header />
+			<Main />
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
