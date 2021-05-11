@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useReducer } from "react";
 import "./App.css";
 import landing from "./img/landing.jpg";
 
@@ -83,15 +83,65 @@ function Authorize({ authorized }) {
 	return <>{authorized ? <Secret /> : <Regular />}</>;
 }
 
+function State() {
+	const [thing, setThing] = useState("coding");
+	const [anotherThing, setAnotherThing] = useState("Laptop");
+
+	useEffect(() => {
+		console.log(`She loves ${thing}`);
+	}, []);
+
+	useEffect(() => {
+		console.log(`She loves ${anotherThing}`);
+	}, []);
+
+	return (
+		<>
+			<h1>
+				I love {thing} and {anotherThing}
+			</h1>
+			<button onClick={() => setThing("coding")}>Change to Coding</button>
+			<button onClick={() => setAnotherThing("laptop")}>
+				Change to Laptop
+			</button>
+
+			<button onClick={() => setThing("coffee")}>Coffee</button>
+			<button onClick={() => setThing("books")}>Books</button>
+		</>
+	);
+}
+
+function Input() {
+	const inputElement = useRef(null);
+
+	function onButtonClick() {
+		inputElement.current.focus();
+	}
+
+	const [checked, toggle] = useReducer((checked) => !checked, false);
+
+	return (
+		<>
+			<input type="text" ref={inputElement} />
+			<button onClick={onButtonClick}>Focus</button>
+			<br />
+			<input type="checkbox" value={checked} onChange={toggle}></input>
+			<p>{checked ? "Checked" : "Not Checked"}</p>
+		</>
+	);
+}
+
 function App() {
 	return (
 		<div className="App">
-			<Authorize authorized={true} />
+			{/* <Authorize authorized={true} />
 			<Header name="React Practices" />
 			<Main type="react" items={itemObjects} />
 			<Footer year={new Date().getFullYear()} />
-			<Form />
+			<Form /> */}
 			{/* <Button /> */}
+			{/* <State /> */}
+			<Input />
 		</div>
 	);
 }
