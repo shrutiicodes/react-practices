@@ -1,149 +1,63 @@
-import React, { useState, useEffect, useRef, useReducer } from "react";
+import React from "react";
 import "./App.css";
-import landing from "./img/landing.jpg";
-
-function Header(props) {
-	return (
-		<header>
-			<h1>{props.name}</h1>
-		</header>
-	);
-}
-
-function Main(props) {
-	return (
-		<header>
-			<h2>This is our {props.type} project</h2>
-			<img src={landing} height={200} />
-			<ul style={{ textAlign: "left" }}>
-				{props.items.map((item) => (
-					<li key={item.id}>{item.title}</li>
-				))}
-			</ul>
-		</header>
-	);
-}
-
-function Footer(props) {
-	return (
-		<header>
-			<h3>All Rights Reserved Project Name &copy; {props.year}</h3>
-		</header>
-	);
-}
-
-// function Button() {
-// 	return (
-// 		<form onSubmit={handleSubmit}>
-// 			<button type="submit" onClick={() => console.log("Clicked!")}>
-// 				Say Clicked!!
-// 			</button>
-// 		</form>
-// 	);
-// }
-
-const [firstItem, ,] = ["lamp", "laptop", "phone"];
-
-console.log(firstItem);
-
-function Form() {
-	const [name, setName] = useState("");
-
-	function handleChange(e) {
-		setName(e.target.value);
-	}
-
-	function handleSubmit(e) {
-		e.preventDefault();
-		alert("Submitted");
-		setName("");
-	}
-
-	return (
-		<form onSubmit={handleSubmit}>
-			<input type="text" value={name} required onChange={handleChange}></input>
-			<button type="submit">Submit</button>
-		</form>
-	);
-}
+import Header from "./Pages/Header";
+import Main from "./Pages/Main";
+import Footer from "./Pages/Footer";
+import Button from "./Pages/Button";
+import Form from "./Pages/Form";
+import Authorize from "./Pages/Authorize";
+import Input from "./Pages/Input";
+import FetchData from "./Pages/FetchData";
+import State from "./Pages/State";
+import Error from "./Pages/Error";
+import { Route, Switch, Link } from "react-router-dom";
 
 const items = ["Books", "Pens", "Code", "Coffee"];
 
 const itemObjects = items.map((item, i) => ({ id: i, title: item }));
 
-function Regular() {
-	return <h1>Please Log in</h1>;
-}
-
-function Secret() {
-	return <h1>Welcome</h1>;
-}
-
-function Authorize({ authorized }) {
-	return <>{authorized ? <Secret /> : <Regular />}</>;
-}
-
-function State() {
-	const [thing, setThing] = useState("coding");
-	const [anotherThing, setAnotherThing] = useState("Laptop");
-
-	useEffect(() => {
-		console.log(`She loves ${thing}`);
-	}, []);
-
-	useEffect(() => {
-		console.log(`She loves ${anotherThing}`);
-	}, []);
-
-	return (
-		<>
-			<h1>
-				I love {thing} and {anotherThing}
-			</h1>
-			<button onClick={() => setThing("coding")}>Change to Coding</button>
-			<button onClick={() => setAnotherThing("laptop")}>
-				Change to Laptop
-			</button>
-
-			<button onClick={() => setThing("coffee")}>Coffee</button>
-			<button onClick={() => setThing("books")}>Books</button>
-		</>
-	);
-}
-
-function Input() {
-	const inputElement = useRef(null);
-
-	function onButtonClick() {
-		inputElement.current.focus();
-	}
-
-	const [checked, toggle] = useReducer((checked) => !checked, false);
-
-	return (
-		<>
-			<input type="text" ref={inputElement} />
-			<button onClick={onButtonClick}>Focus</button>
-			<br />
-			<input type="checkbox" value={checked} onChange={toggle}></input>
-			<p>{checked ? "Checked" : "Not Checked"}</p>
-		</>
-	);
-}
-
 function App() {
 	return (
 		<div className="App">
-			{/* <Authorize authorized={true} />
-			<Header name="React Practices" />
-			<Main type="react" items={itemObjects} />
-			<Footer year={new Date().getFullYear()} />
-			<Form /> */}
-			{/* <Button /> */}
-			{/* <State /> */}
-			<Input />
+			<h1>Hello world!</h1>
+			{/* <nav>
+				<Link to="/dashboard">Dashboard</Link>
+				<Link to="/btn">Button</Link>
+				<Link to="/form">Form</Link>
+				<Link to="/input">Input</Link>
+				<Link to="/data">User Data</Link>
+				<Link to="/state">State</Link>
+			</nav>
+			<Switch>
+				<Route exact path="/">
+					<Authorize authorized={false} />
+				</Route>
+				<Route exact path="/dashboard">
+					<Header name="React Practices" />
+					<Main type="react" items={itemObjects} />
+					<Footer year={new Date().getFullYear()} />
+				</Route>
+
+				<Route exact path="/btn">
+					<Button />
+				</Route>
+				<Route exact path="/form">
+					<Form />
+				</Route>
+				<Route exact path="/input">
+					<Input />
+				</Route>
+				<Route exact path="/data">
+					<FetchData login="shrutipanjwani" />
+				</Route>
+				<Route exact path="/state">
+					<State />
+				</Route>
+				<Route>
+					<Error />
+				</Route>
+			</Switch> */}
 		</div>
 	);
 }
-
 export default App;
